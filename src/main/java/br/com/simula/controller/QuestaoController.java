@@ -18,7 +18,8 @@ public class QuestaoController {
     private final QuestaoService service;
 
     @GetMapping
-    public Page<Questao> listar(@RequestParam(required = false) Long materiaId,
+    public Page<Questao> listar(@RequestParam(required = false) Long tipoId,
+                               @RequestParam(required = false) Long materiaId,
                                @RequestParam(required = false) Long assuntoId,
                                @RequestParam(required = false) Long topicoId,
                                @RequestParam(required = false) Long orgaoId,
@@ -26,7 +27,7 @@ public class QuestaoController {
                                @RequestParam(required = false) Long cargoId,
                                @RequestParam(required = false) Integer ano,
                                @PageableDefault(size = 20) Pageable pageable) {
-        return service.findAll(materiaId, assuntoId, topicoId, orgaoId, bancaId, cargoId, ano, pageable);
+        return service.findAll(tipoId, materiaId, assuntoId, topicoId, orgaoId, bancaId, cargoId, ano, pageable);
     }
 
     @GetMapping("/{id}")

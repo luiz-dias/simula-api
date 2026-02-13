@@ -21,6 +21,7 @@ br\com\simula\service\AssuntoService.class
 br\com\simula\controller\MateriaController.class
 br\com\simula\repository\SimuladoQuestaoRepository.class
 br\com\simula\exception\GlobalExceptionHandler.class
+br\com\simula\service\TipoService.class
 br\com\simula\repository\BancaRepository.class
 br\com\simula\repository\MateriaRepository.class
 br\com\simula\service\BancaService.class
@@ -37,13 +38,17 @@ br\com\simula\controller\OrgaoController.class
 br\com\simula\controller\ExportController.class
 br\com\simula\entity\Topico.class
 br\com\simula\entity\Banca$BancaBuilder.class
+br\com\simula\entity\Tipo.class
 br\com\simula\controller\CargoController.class
+br\com\simula\controller\TipoController.class
 br\com\simula\spec\QuestaoSpec.class
 br\com\simula\entity\Materia.class
 br\com\simula\repository\TopicoRepository.class
 br\com\simula\entity\SimuladoQuestao$SimuladoQuestaoBuilder.class
 br\com\simula\entity\Orgao$OrgaoBuilder.class
 br\com\simula\service\MateriaService.class
+br\com\simula\repository\TipoRepository.class
 br\com\simula\service\SimuladoService.class
 br\com\simula\entity\Cargo$CargoBuilder.class
+br\com\simula\entity\Tipo$TipoBuilder.class
 br\com\simula\controller\BancaController.class

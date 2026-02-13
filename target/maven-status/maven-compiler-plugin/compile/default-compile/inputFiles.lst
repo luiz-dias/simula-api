@@ -1,13 +1,16 @@
 E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\controller\BancaController.java
 E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\entity\Materia.java
+E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\entity\Tipo.java
 E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\repository\SimuladoQuestaoRepository.java
 E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\controller\CargoController.java
+E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\repository\TipoRepository.java
 E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\entity\Banca.java
 E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\entity\Orgao.java
 E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\entity\Cargo.java
 E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\SimulaApiApplication.java
 E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\repository\TopicoRepository.java
 E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\repository\OrgaoRepository.java
+E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\controller\TipoController.java
 E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\entity\Simulado.java
 E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\entity\Assunto.java
 E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\controller\QuestaoController.java
@@ -35,6 +38,7 @@ E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\service\MateriaS
 E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\controller\AssuntoController.java
 E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\repository\CargoRepository.java
 E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\service\CargoService.java
+E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\service\TipoService.java
 E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\controller\ExportController.java
 E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\repository\QuestaoRepository.java
 E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\service\BancaService.java

@@ -7,20 +7,20 @@ import lombok.*;
 import java.time.Instant;
 
 @Entity
-@Table(name = "materia")
+@Table(name = "tipo")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Materia {
+public class Tipo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String nome;
 
     @Column(name = "created_at", nullable = false, updatable = false)

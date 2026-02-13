@@ -8,7 +8,7 @@ import lombok.*;
 import java.time.Instant;
 
 @Entity
-@Table(name = "questoes")
+@Table(name = "questao")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -41,6 +41,10 @@ public class Questao {
 
     @Column(name = "resposta_correta", length = 1)
     private String respostaCorreta; // A, B, C, D ou E
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tipo_id")
+    private Tipo tipo;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)

@@ -8,7 +8,7 @@ import lombok.*;
 import java.time.Instant;
 
 @Entity
-@Table(name = "assuntos")
+@Table(name = "assunto")
 @Getter
 @Setter
 @NoArgsConstructor

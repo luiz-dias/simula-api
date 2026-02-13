@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "simulados")
+@Table(name = "simulado")
 @Getter
 @Setter
 @NoArgsConstructor

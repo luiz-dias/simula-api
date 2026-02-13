@@ -11,10 +11,13 @@ public final class QuestaoSpec {
 
     private QuestaoSpec() {}
 
-    public static Specification<Questao> withFilters(Long materiaId, Long assuntoId, Long topicoId,
+    public static Specification<Questao> withFilters(Long tipoId, Long materiaId, Long assuntoId, Long topicoId,
                                                       Long orgaoId, Long bancaId, Long cargoId, Integer ano) {
         return (root, query, cb) -> {
             List<Predicate> predicates = new ArrayList<>();
+            if (tipoId != null) {
+                predicates.add(cb.equal(root.get("tipo").get("id"), tipoId));
+            }
             if (materiaId != null) {
                 predicates.add(cb.equal(root.get("materia").get("id"), materiaId));
             }

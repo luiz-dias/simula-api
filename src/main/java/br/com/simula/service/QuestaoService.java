@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class QuestaoService {
 
     private final QuestaoRepository repository;
+    private final TipoService tipoService;
     private final MateriaService materiaService;
     private final AssuntoService assuntoService;
     private final TopicoService topicoService;
@@ -23,10 +24,10 @@ public class QuestaoService {
     private final CargoService cargoService;
 
     @Transactional(readOnly = true)
-    public Page<Questao> findAll(Long materiaId, Long assuntoId, Long topicoId,
+    public Page<Questao> findAll(Long tipoId, Long materiaId, Long assuntoId, Long topicoId,
                                  Long orgaoId, Long bancaId, Long cargoId, Integer ano,
                                  Pageable pageable) {
-        Specification<Questao> spec = QuestaoSpec.withFilters(materiaId, assuntoId, topicoId, orgaoId, bancaId, cargoId, ano);
+        Specification<Questao> spec = QuestaoSpec.withFilters(tipoId, materiaId, assuntoId, topicoId, orgaoId, bancaId, cargoId, ano);
         return repository.findAll(spec, pageable);
     }
 
@@ -70,6 +71,11 @@ public class QuestaoService {
     }
 
     private void resolveAssociations(Questao target, Questao source) {
+        if (source.getTipo() != null && source.getTipo().getId() != null) {
+            target.setTipo(tipoService.findById(source.getTipo().getId()));
+        } else {
+            target.setTipo(null);
+        }
         if (source.getMateria() != null && source.getMateria().getId() != null) {
             target.setMateria(materiaService.findById(source.getMateria().getId()));
         }

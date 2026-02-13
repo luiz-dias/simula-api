@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 public interface QuestaoRepository extends JpaRepository<Questao, Long>, JpaSpecificationExecutor<Questao> {
 
     @Query("SELECT q FROM Questao q " +
+           "LEFT JOIN FETCH q.tipo " +
            "LEFT JOIN FETCH q.materia " +
            "LEFT JOIN FETCH q.assunto " +
            "LEFT JOIN FETCH q.topico " +

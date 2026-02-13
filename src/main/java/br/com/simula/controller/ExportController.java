@@ -29,6 +29,7 @@ public class ExportController {
     private final BancaRepository bancaRepository;
     private final CargoRepository cargoRepository;
     private final SimuladoRepository simuladoRepository;
+    private final TipoRepository tipoRepository;
 
     @GetMapping(value = "/csv", produces = "text/csv; charset=UTF-8")
     public ResponseEntity<byte[]> exportCsv() {
@@ -44,6 +45,7 @@ public class ExportController {
         exportOrgaos(pw);
         exportBancas(pw);
         exportCargos(pw);
+        exportTipos(pw);
         exportQuestoes(pw);
         exportSimulados(pw);
 
@@ -115,13 +117,23 @@ public class ExportController {
         pw.println();
     }
 
+    private void exportTipos(PrintWriter pw) {
+        pw.println("=== TIPOS ===");
+        csvRow(pw, "id", "nome", "created_at", "updated_at");
+        for (Tipo t : tipoRepository.findAll()) {
+            csvRow(pw, t.getId(), t.getNome(), t.getCreatedAt(), t.getUpdatedAt());
+        }
+        pw.println();
+    }
+
     private void exportQuestoes(PrintWriter pw) {
         pw.println("=== QUESTÕES ===");
         csvRow(pw, "id", "enunciado", "alternativa_a", "alternativa_b", "alternativa_c", "alternativa_d", "alternativa_e",
-                "resposta_correta", "materia_id", "assunto_id", "topico_id", "orgao_id", "banca_id", "cargo_id", "ano", "created_at", "updated_at");
+                "resposta_correta", "tipo_id", "materia_id", "assunto_id", "topico_id", "orgao_id", "banca_id", "cargo_id", "ano", "created_at", "updated_at");
         for (Questao q : questaoRepository.findAll()) {
             csvRow(pw, q.getId(), q.getEnunciado(), q.getAlternativaA(), q.getAlternativaB(), q.getAlternativaC(),
                     q.getAlternativaD(), q.getAlternativaE(), q.getRespostaCorreta(),
+                    q.getTipo() != null ? q.getTipo().getId() : null,
                     q.getMateria() != null ? q.getMateria().getId() : null,
                     q.getAssunto() != null ? q.getAssunto().getId() : null,
                     q.getTopico() != null ? q.getTopico().getId() : null,

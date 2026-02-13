@@ -21,6 +21,7 @@ public class DashboardController {
     private final BancaRepository bancaRepository;
     private final CargoRepository cargoRepository;
     private final SimuladoRepository simuladoRepository;
+    private final TipoRepository tipoRepository;
 
     @GetMapping("/estatisticas")
     public Map<String, Long> estatisticas() {
@@ -32,6 +33,7 @@ public class DashboardController {
                 "totalOrgaos", orgaoRepository.count(),
                 "totalBancas", bancaRepository.count(),
                 "totalCargos", cargoRepository.count(),
+                "totalTipos", tipoRepository.count(),
                 "totalSimulados", simuladoRepository.count()
         );
     }
