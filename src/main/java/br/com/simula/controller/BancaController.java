@@ -1,6 +1,9 @@
 package br.com.simula.controller;
 
+import br.com.simula.dto.BancaRequest;
+import br.com.simula.dto.BancaResponse;
 import br.com.simula.entity.Banca;
+import br.com.simula.mapper.SimulaMapper;
 import br.com.simula.service.BancaService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -16,26 +19,33 @@ import org.springframework.web.bind.annotation.*;
 public class BancaController {
 
     private final BancaService service;
+    private final SimulaMapper mapper;
 
     @GetMapping
-    public Page<Banca> listar(@PageableDefault(size = 20) Pageable pageable) {
-        return service.findAll(pageable);
+    public Page<BancaResponse> listar(@PageableDefault(size = 20) Pageable pageable) {
+        return service.findAll(pageable).map(mapper::toResponse);
     }
 
     @GetMapping("/{id}")
-    public Banca detalhes(@PathVariable Long id) {
-        return service.findById(id);
+    public BancaResponse detalhes(@PathVariable Long id) {
+        return mapper.toResponse(service.findById(id));
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Banca criar(@Valid @RequestBody Banca banca) {
-        return service.create(banca);
+    public BancaResponse criar(@Valid @RequestBody BancaRequest request) {
+        Banca banca = new Banca();
+        banca.setNome(request.getNome());
+        banca.setSigla(request.getSigla());
+        return mapper.toResponse(service.create(banca));
     }
 
     @PutMapping("/{id}")
-    public Banca atualizar(@PathVariable Long id, @Valid @RequestBody Banca banca) {
-        return service.update(id, banca);
+    public BancaResponse atualizar(@PathVariable Long id, @Valid @RequestBody BancaRequest request) {
+        Banca banca = new Banca();
+        banca.setNome(request.getNome());
+        banca.setSigla(request.getSigla());
+        return mapper.toResponse(service.update(id, banca));
     }
 
     @DeleteMapping("/{id}")

@@ -1,6 +1,9 @@
 package br.com.simula.controller;
 
+import br.com.simula.dto.MateriaRequest;
+import br.com.simula.dto.MateriaResponse;
 import br.com.simula.entity.Materia;
+import br.com.simula.mapper.SimulaMapper;
 import br.com.simula.service.MateriaService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -16,26 +19,31 @@ import org.springframework.web.bind.annotation.*;
 public class MateriaController {
 
     private final MateriaService service;
+    private final SimulaMapper mapper;
 
     @GetMapping
-    public Page<Materia> listar(@PageableDefault(size = 20) Pageable pageable) {
-        return service.findAll(pageable);
+    public Page<MateriaResponse> listar(@PageableDefault(size = 20) Pageable pageable) {
+        return service.findAll(pageable).map(mapper::toResponse);
     }
 
     @GetMapping("/{id}")
-    public Materia detalhes(@PathVariable Long id) {
-        return service.findById(id);
+    public MateriaResponse detalhes(@PathVariable Long id) {
+        return mapper.toResponse(service.findById(id));
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Materia criar(@Valid @RequestBody Materia materia) {
-        return service.create(materia);
+    public MateriaResponse criar(@Valid @RequestBody MateriaRequest request) {
+        Materia materia = new Materia();
+        materia.setNome(request.getNome());
+        return mapper.toResponse(service.create(materia));
     }
 
     @PutMapping("/{id}")
-    public Materia atualizar(@PathVariable Long id, @Valid @RequestBody Materia materia) {
-        return service.update(id, materia);
+    public MateriaResponse atualizar(@PathVariable Long id, @Valid @RequestBody MateriaRequest request) {
+        Materia materia = new Materia();
+        materia.setNome(request.getNome());
+        return mapper.toResponse(service.update(id, materia));
     }
 
     @DeleteMapping("/{id}")

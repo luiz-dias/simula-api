@@ -1,6 +1,9 @@
 package br.com.simula.controller;
 
+import br.com.simula.dto.TipoRequest;
+import br.com.simula.dto.TipoResponse;
 import br.com.simula.entity.Tipo;
+import br.com.simula.mapper.SimulaMapper;
 import br.com.simula.service.TipoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -16,26 +19,31 @@ import org.springframework.web.bind.annotation.*;
 public class TipoController {
 
     private final TipoService service;
+    private final SimulaMapper mapper;
 
     @GetMapping
-    public Page<Tipo> listar(@PageableDefault(size = 20) Pageable pageable) {
-        return service.findAll(pageable);
+    public Page<TipoResponse> listar(@PageableDefault(size = 20) Pageable pageable) {
+        return service.findAll(pageable).map(mapper::toResponse);
     }
 
     @GetMapping("/{id}")
-    public Tipo detalhes(@PathVariable Long id) {
-        return service.findById(id);
+    public TipoResponse detalhes(@PathVariable Long id) {
+        return mapper.toResponse(service.findById(id));
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Tipo criar(@Valid @RequestBody Tipo tipo) {
-        return service.create(tipo);
+    public TipoResponse criar(@Valid @RequestBody TipoRequest request) {
+        Tipo tipo = new Tipo();
+        tipo.setNome(request.getNome());
+        return mapper.toResponse(service.create(tipo));
     }
 
     @PutMapping("/{id}")
-    public Tipo atualizar(@PathVariable Long id, @Valid @RequestBody Tipo tipo) {
-        return service.update(id, tipo);
+    public TipoResponse atualizar(@PathVariable Long id, @Valid @RequestBody TipoRequest request) {
+        Tipo tipo = new Tipo();
+        tipo.setNome(request.getNome());
+        return mapper.toResponse(service.update(id, tipo));
     }
 
     @DeleteMapping("/{id}")

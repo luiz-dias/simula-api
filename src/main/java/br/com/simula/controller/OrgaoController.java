@@ -1,6 +1,9 @@
 package br.com.simula.controller;
 
+import br.com.simula.dto.OrgaoRequest;
+import br.com.simula.dto.OrgaoResponse;
 import br.com.simula.entity.Orgao;
+import br.com.simula.mapper.SimulaMapper;
 import br.com.simula.service.OrgaoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -16,26 +19,33 @@ import org.springframework.web.bind.annotation.*;
 public class OrgaoController {
 
     private final OrgaoService service;
+    private final SimulaMapper mapper;
 
     @GetMapping
-    public Page<Orgao> listar(@PageableDefault(size = 20) Pageable pageable) {
-        return service.findAll(pageable);
+    public Page<OrgaoResponse> listar(@PageableDefault(size = 20) Pageable pageable) {
+        return service.findAll(pageable).map(mapper::toResponse);
     }
 
     @GetMapping("/{id}")
-    public Orgao detalhes(@PathVariable Long id) {
-        return service.findById(id);
+    public OrgaoResponse detalhes(@PathVariable Long id) {
+        return mapper.toResponse(service.findById(id));
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Orgao criar(@Valid @RequestBody Orgao orgao) {
-        return service.create(orgao);
+    public OrgaoResponse criar(@Valid @RequestBody OrgaoRequest request) {
+        Orgao orgao = new Orgao();
+        orgao.setNome(request.getNome());
+        orgao.setSigla(request.getSigla());
+        return mapper.toResponse(service.create(orgao));
     }
 
     @PutMapping("/{id}")
-    public Orgao atualizar(@PathVariable Long id, @Valid @RequestBody Orgao orgao) {
-        return service.update(id, orgao);
+    public OrgaoResponse atualizar(@PathVariable Long id, @Valid @RequestBody OrgaoRequest request) {
+        Orgao orgao = new Orgao();
+        orgao.setNome(request.getNome());
+        orgao.setSigla(request.getSigla());
+        return mapper.toResponse(service.update(id, orgao));
     }
 
     @DeleteMapping("/{id}")

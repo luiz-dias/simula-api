@@ -20,27 +20,54 @@ A API sobe em `http://localhost:8080`. O console H2 fica em `http://localhost:80
 ### Questões
 | Método | Endpoint | Descrição |
 |--------|----------|-----------|
-| GET | /api/questoes | Listar (filtros: materiaId, assuntoId, topicoId, orgaoId, bancaId, cargoId, ano) |
+| GET | /api/questoes | Listar (filtros: tipoId, materiaId, assuntoId, topicoId, orgaoId, bancaId, cargoId, ano; paginação: `page`, `size`) |
 | GET | /api/questoes/:id | Detalhes |
 | POST | /api/questoes | Criar |
 | PUT | /api/questoes/:id | Atualizar |
 | DELETE | /api/questoes/:id | Deletar |
 
-### Matérias, Assuntos, Tópicos, Órgãos, Bancas, Cargos
-- **GET** /api/materias, /api/assuntos, /api/topicos, /api/orgaos, /api/bancas, /api/cargos – listar (com paginação)
+### Matérias
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| GET | /api/materias | Listar (paginação: `page`, `size`) |
+| GET | /api/materias/:id | Detalhes |
+| POST | /api/materias | Criar |
+| PUT | /api/materias/:id | Atualizar |
+| DELETE | /api/materias/:id | Deletar |
+
+### Assuntos
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| GET | /api/assuntos | Listar (filtro opcional: `materiaId`; paginação: `page`, `size`) |
+| GET | /api/assuntos/:id | Detalhes |
+| POST | /api/assuntos | Criar |
+| PUT | /api/assuntos/:id | Atualizar |
+| DELETE | /api/assuntos/:id | Deletar |
+
+### Tópicos
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| GET | /api/topicos | Listar (filtro opcional: `assuntoId`; paginação: `page`, `size`) |
+| GET | /api/topicos/:id | Detalhes |
+| POST | /api/topicos | Criar |
+| PUT | /api/topicos/:id | Atualizar |
+| DELETE | /api/topicos/:id | Deletar |
+
+### Órgãos, Bancas, Cargos, Tipos
+- **GET** /api/orgaos, /api/bancas, /api/cargos, /api/tipos – listar (com paginação)
 - **GET** /api/.../:id – detalhes
 - **POST** /api/... – criar
 - **PUT** /api/.../:id – atualizar
 - **DELETE** /api/.../:id – deletar
 
-Filtros opcionais: assuntos por `materiaId`, tópicos por `assuntoId`, cargos por `orgaoId`.
+Filtro opcional: cargos por `orgaoId`.
 
 ### Simulados
 | Método | Endpoint | Descrição |
 |--------|----------|-----------|
 | GET | /api/simulados | Listar (filtros: cargoId, orgaoId, ano) |
 | GET | /api/simulados/:id | Detalhes (com questões) |
-| POST | /api/simulados | Criar (incluir `simuladosQuestoes`: lista de `{ questao: { id }, ordem }`) |
+| POST | /api/simulados | Criar (incluir `simuladosQuestoes`: lista de `{ questaoId, ordem }`) |
 | PUT | /api/simulados/:id | Atualizar |
 | DELETE | /api/simulados/:id | Deletar |
 | GET | /api/simulados/:id/gerar-docx | Download do simulado em DOCX |
@@ -50,6 +77,52 @@ Filtros opcionais: assuntos por `materiaId`, tópicos por `assuntoId`, cargos po
 - **GET** /api/export/csv – exportar todos os dados em CSV (UTF-8)
 
 ## Exemplo de payloads
+
+**Criar matéria** (POST /api/materias):
+```json
+{
+  "nome": "Direito Constitucional"
+}
+```
+
+**Atualizar matéria** (PUT /api/materias/:id):
+```json
+{
+  "nome": "Direito Constitucional"
+}
+```
+
+**Criar assunto** (POST /api/assuntos):
+```json
+{
+  "nome": "Controle de Constitucionalidade",
+  "materiaId": 1
+}
+```
+
+**Atualizar assunto** (PUT /api/assuntos/:id):
+```json
+{
+  "nome": "Controle de Constitucionalidade",
+  "materiaId": 1
+}
+```
+
+**Criar tópico** (POST /api/topicos):
+```json
+{
+  "nome": "ADI e ADC",
+  "assuntoId": 1
+}
+```
+
+**Atualizar tópico** (PUT /api/topicos/:id):
+```json
+{
+  "nome": "ADI e ADC",
+  "assuntoId": 1
+}
+```
 
 **Criar questão** (POST /api/questoes):
 ```json
@@ -61,22 +134,32 @@ Filtros opcionais: assuntos por `materiaId`, tópicos por `assuntoId`, cargos po
   "alternativaD": "Salvador",
   "alternativaE": "Belo Horizonte",
   "respostaCorreta": "B",
-  "materia": { "id": 1 },
+  "tipoId": 1,
+  "materiaId": 1,
+  "assuntoId": 1,
+  "topicoId": 1,
+  "orgaoId": 1,
+  "bancaId": 1,
+  "cargoId": 1,
   "ano": 2024
 }
 ```
+
+Campos opcionais na questão: `tipoId`, `assuntoId`, `topicoId`, `orgaoId`, `bancaId`, `cargoId`, `alternativaA` a `alternativaE`, `ano`. Obrigatórios: `enunciado`, `materiaId`.
+
+**Atualizar questão** (PUT /api/questoes/:id): mesmo formato do criar.
 
 **Criar simulado com questões** (POST /api/simulados):
 ```json
 {
   "titulo": "Simulado Concurso 2024",
-  "cargo": { "id": 1 },
-  "orgao": { "id": 1 },
+  "cargoId": 1,
+  "orgaoId": 1,
   "ano": 2024,
   "ordemMaterias": [1, 2, 3],
   "simuladosQuestoes": [
-    { "questao": { "id": 1 }, "ordem": 1 },
-    { "questao": { "id": 2 }, "ordem": 2 }
+    { "questaoId": 1, "ordem": 1 },
+    { "questaoId": 2, "ordem": 2 }
   ]
 }
 ```

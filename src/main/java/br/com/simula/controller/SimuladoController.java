@@ -1,6 +1,14 @@
 package br.com.simula.controller;
 
+import br.com.simula.dto.SimuladoQuestaoRequest;
+import br.com.simula.dto.SimuladoRequest;
+import br.com.simula.dto.SimuladoResponse;
 import br.com.simula.entity.Simulado;
+import br.com.simula.entity.SimuladoQuestao;
+import br.com.simula.mapper.SimulaMapper;
+import br.com.simula.service.CargoService;
+import br.com.simula.service.OrgaoService;
+import br.com.simula.service.QuestaoService;
 import br.com.simula.service.SimuladoDocxService;
 import br.com.simula.service.SimuladoService;
 import jakarta.validation.Valid;
@@ -8,8 +16,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +25,8 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/simulados")
@@ -25,29 +35,35 @@ public class SimuladoController {
 
     private final SimuladoService service;
     private final SimuladoDocxService docxService;
+    private final CargoService cargoService;
+    private final OrgaoService orgaoService;
+    private final QuestaoService questaoService;
+    private final SimulaMapper mapper;
 
     @GetMapping
-    public Page<Simulado> listar(@RequestParam(required = false) Long cargoId,
-                                 @RequestParam(required = false) Long orgaoId,
-                                 @RequestParam(required = false) Integer ano,
-                                 @PageableDefault(size = 20) Pageable pageable) {
-        return service.findAll(cargoId, orgaoId, ano, pageable);
+    public Page<SimuladoResponse> listar(@RequestParam(required = false) Long cargoId,
+                                          @RequestParam(required = false) Long orgaoId,
+                                          @RequestParam(required = false) Integer ano,
+                                          @PageableDefault(size = 20) Pageable pageable) {
+        return service.findAll(cargoId, orgaoId, ano, pageable).map(mapper::toResponse);
     }
 
     @GetMapping("/{id}")
-    public Simulado detalhes(@PathVariable Long id) {
-        return service.findById(id);
+    public SimuladoResponse detalhes(@PathVariable Long id) {
+        return mapper.toResponse(service.findById(id));
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Simulado criar(@Valid @RequestBody Simulado simulado) {
-        return service.create(simulado);
+    public SimuladoResponse criar(@Valid @RequestBody SimuladoRequest request) {
+        Simulado simulado = toEntity(request);
+        return mapper.toResponse(service.create(simulado));
     }
 
     @PutMapping("/{id}")
-    public Simulado atualizar(@PathVariable Long id, @Valid @RequestBody Simulado simulado) {
-        return service.update(id, simulado);
+    public SimuladoResponse atualizar(@PathVariable Long id, @Valid @RequestBody SimuladoRequest request) {
+        Simulado simulado = toEntity(request);
+        return mapper.toResponse(service.update(id, simulado));
     }
 
     @DeleteMapping("/{id}")
@@ -72,5 +88,26 @@ public class SimuladoController {
         } catch (IOException e) {
             throw new RuntimeException("Erro ao gerar documento: " + e.getMessage());
         }
+    }
+
+    private Simulado toEntity(SimuladoRequest req) {
+        Simulado s = new Simulado();
+        s.setTitulo(req.getTitulo());
+        s.setCargo(req.getCargoId() != null ? cargoService.findById(req.getCargoId()) : null);
+        s.setOrgao(req.getOrgaoId() != null ? orgaoService.findById(req.getOrgaoId()) : null);
+        s.setAno(req.getAno());
+        s.setDataCriacao(req.getDataCriacao());
+        s.setOrdemMaterias(req.getOrdemMaterias());
+        if (req.getSimuladosQuestoes() != null && !req.getSimuladosQuestoes().isEmpty()) {
+            List<SimuladoQuestao> list = new ArrayList<>();
+            for (SimuladoQuestaoRequest sqReq : req.getSimuladosQuestoes()) {
+                SimuladoQuestao sq = new SimuladoQuestao();
+                sq.setQuestao(questaoService.findById(sqReq.getQuestaoId()));
+                sq.setOrdem(sqReq.getOrdem());
+                list.add(sq);
+            }
+            s.setSimuladosQuestoes(list);
+        }
+        return s;
     }
 }
