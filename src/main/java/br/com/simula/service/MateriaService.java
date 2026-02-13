@@ -34,7 +34,6 @@ public class MateriaService {
     public Materia update(Long id, Materia materiaAtualizada) {
         Materia existente = findById(id);
         existente.setNome(materiaAtualizada.getNome());
-        existente.setDescricao(materiaAtualizada.getDescricao());
         return repository.save(existente);
     }
 

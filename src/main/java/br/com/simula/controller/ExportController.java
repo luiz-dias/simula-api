@@ -65,9 +65,9 @@ public class ExportController {
 
     private void exportMaterias(PrintWriter pw) {
         pw.println("=== MATÉRIAS ===");
-        csvRow(pw, "id", "nome", "descricao", "created_at", "updated_at");
+        csvRow(pw, "id", "nome", "created_at", "updated_at");
         for (Materia m : materiaRepository.findAll()) {
-            csvRow(pw, m.getId(), m.getNome(), m.getDescricao(), m.getCreatedAt(), m.getUpdatedAt());
+            csvRow(pw, m.getId(), m.getNome(), m.getCreatedAt(), m.getUpdatedAt());
         }
         pw.println();
     }
