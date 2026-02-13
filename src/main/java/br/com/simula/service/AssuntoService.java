@@ -25,7 +25,7 @@ public class AssuntoService {
 
     @Transactional(readOnly = true)
     public Assunto findById(Long id) {
-        return repository.findById(id)
+        return repository.findWithMateriaById(id)
                 .orElseThrow(() -> new RuntimeException("Assunto não encontrado com id: " + id));
     }
 

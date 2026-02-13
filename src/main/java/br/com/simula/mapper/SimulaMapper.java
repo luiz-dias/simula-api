@@ -27,6 +27,7 @@ public class SimulaMapper {
                 .id(e.getId())
                 .nome(e.getNome())
                 .materiaId(e.getMateria() != null ? e.getMateria().getId() : null)
+                .materia(toResponse(e.getMateria()))
                 .createdAt(e.getCreatedAt())
                 .updatedAt(e.getUpdatedAt())
                 .build();
