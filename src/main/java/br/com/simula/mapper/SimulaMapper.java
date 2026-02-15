@@ -39,6 +39,7 @@ public class SimulaMapper {
                 .id(e.getId())
                 .nome(e.getNome())
                 .assuntoId(e.getAssunto() != null ? e.getAssunto().getId() : null)
+                .assunto(toResponse(e.getAssunto()))
                 .createdAt(e.getCreatedAt())
                 .updatedAt(e.getUpdatedAt())
                 .build();

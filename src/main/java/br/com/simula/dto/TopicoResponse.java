@@ -14,6 +14,7 @@ public class TopicoResponse {
     private Long id;
     private String nome;
     private Long assuntoId;
+    private AssuntoResponse assunto;
     private Instant createdAt;
     private Instant updatedAt;
 }
