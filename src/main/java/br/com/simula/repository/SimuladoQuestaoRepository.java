@@ -12,4 +12,6 @@ public interface SimuladoQuestaoRepository extends JpaRepository<SimuladoQuestao
     List<SimuladoQuestao> findBySimuladoIdOrderByOrdemAsc(Long simuladoId);
 
     void deleteBySimuladoId(Long simuladoId);
+
+    void deleteByQuestaoIdIn(List<Long> questaoIds);
 }

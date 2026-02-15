@@ -33,7 +33,7 @@ A API sobe em `http://localhost:8080`. O console H2 fica em `http://localhost:80
 | GET | /api/materias/:id | Detalhes |
 | POST | /api/materias | Criar |
 | PUT | /api/materias/:id | Atualizar |
-| DELETE | /api/materias/:id | Deletar |
+| DELETE | /api/materias/:id | Deletar (query opcional: `cascade=true` para excluir em cascata assuntos, tópicos, questões vinculadas) |
 
 ### Assuntos
 | Método | Endpoint | Descrição |

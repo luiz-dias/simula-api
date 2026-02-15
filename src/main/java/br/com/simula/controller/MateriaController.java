@@ -48,7 +48,8 @@ public class MateriaController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletar(@PathVariable Long id) {
-        service.deleteById(id);
+    public void deletar(@PathVariable Long id,
+                        @RequestParam(name = "cascade", defaultValue = "false") boolean cascade) {
+        service.deleteById(id, cascade);
     }
 }

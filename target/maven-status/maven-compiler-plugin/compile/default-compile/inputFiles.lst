@@ -15,6 +15,7 @@ E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\service\AssuntoS
 E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\dto\BancaResponse.java
 E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\controller\MateriaController.java
 E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\entity\SimuladoQuestao.java
+E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\exception\EntidadeComVinculosException.java
 E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\entity\Questao.java
 E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\controller\OrgaoController.java
 E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\service\MateriaService.java

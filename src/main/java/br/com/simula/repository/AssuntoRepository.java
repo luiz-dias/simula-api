@@ -19,4 +19,8 @@ public interface AssuntoRepository extends JpaRepository<Assunto, Long> {
 
     @EntityGraph(attributePaths = {"materia"})
     java.util.Optional<Assunto> findWithMateriaById(Long id);
+
+    boolean existsByMateriaId(Long materiaId);
+
+    void deleteByMateriaId(Long materiaId);
 }

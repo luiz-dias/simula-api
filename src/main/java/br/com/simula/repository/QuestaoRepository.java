@@ -22,4 +22,9 @@ public interface QuestaoRepository extends JpaRepository<Questao, Long>, JpaSpec
            "LEFT JOIN FETCH q.cargo " +
            "WHERE q.id = :id")
     java.util.Optional<Questao> findByIdWithAssociations(@Param("id") Long id);
+
+    @Query("SELECT q.id FROM Questao q WHERE q.materia.id = :materiaId")
+    java.util.List<Long> findIdsByMateriaId(@Param("materiaId") Long materiaId);
+
+    void deleteByMateriaId(Long materiaId);
 }

@@ -63,6 +63,7 @@ br\com\simula\dto\MateriaResponse.class
 br\com\simula\entity\Questao$QuestaoBuilder.class
 br\com\simula\dto\TipoRequest$TipoRequestBuilder.class
 br\com\simula\config\CorsFilter.class
+br\com\simula\exception\EntidadeComVinculosException.class
 br\com\simula\dto\TipoResponse.class
 br\com\simula\service\AssuntoService.class
 br\com\simula\config\WebConfig.class
