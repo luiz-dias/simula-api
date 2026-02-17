@@ -1,3 +1,4 @@
+br\com\simula\dto\SimuladoConfiguracaoResponse$SimuladoConfiguracaoResponseBuilder.class
 br\com\simula\dto\QuestaoRequest$QuestaoRequestBuilder.class
 br\com\simula\dto\QuestaoResponse.class
 br\com\simula\repository\CargoRepository.class
@@ -10,6 +11,7 @@ br\com\simula\entity\Assunto$AssuntoBuilder.class
 br\com\simula\entity\Questao.class
 br\com\simula\repository\OrgaoRepository.class
 br\com\simula\controller\SimuladoController.class
+br\com\simula\dto\GerarSimuladoRequest$ConfiguracaoMateriaRequest.class
 br\com\simula\controller\TopicoController.class
 br\com\simula\service\CargoService.class
 br\com\simula\dto\CargoResponse.class
@@ -20,6 +22,7 @@ br\com\simula\repository\AssuntoRepository.class
 br\com\simula\entity\Assunto.class
 br\com\simula\dto\CargoResponse$CargoResponseBuilder.class
 br\com\simula\controller\MateriaController.class
+br\com\simula\dto\GerarSimuladoRequest.class
 br\com\simula\repository\MateriaRepository.class
 br\com\simula\dto\SimuladoResponse$SimuladoResponseBuilder.class
 br\com\simula\service\BancaService.class
@@ -32,6 +35,8 @@ br\com\simula\service\TopicoService.class
 br\com\simula\dto\QuestaoRequest.class
 br\com\simula\controller\DashboardController.class
 br\com\simula\controller\OrgaoController.class
+br\com\simula\entity\SimuladoConfiguracao.class
+br\com\simula\dto\GerarSimuladoRequest$GerarSimuladoRequestBuilder.class
 br\com\simula\entity\Topico.class
 br\com\simula\dto\MateriaResponse$MateriaResponseBuilder.class
 br\com\simula\dto\SimuladoQuestaoRequest.class
@@ -39,6 +44,7 @@ br\com\simula\entity\Banca$BancaBuilder.class
 br\com\simula\controller\TipoController.class
 br\com\simula\dto\BancaRequest.class
 br\com\simula\spec\QuestaoSpec.class
+br\com\simula\entity\SimuladoConfiguracao$SimuladoConfiguracaoBuilder.class
 br\com\simula\repository\TopicoRepository.class
 br\com\simula\dto\TopicoRequest$TopicoRequestBuilder.class
 br\com\simula\dto\SimuladoQuestaoRequest$SimuladoQuestaoRequestBuilder.class
@@ -49,9 +55,13 @@ br\com\simula\repository\TipoRepository.class
 br\com\simula\service\SimuladoService.class
 br\com\simula\dto\AssuntoResponse.class
 br\com\simula\entity\Tipo$TipoBuilder.class
+br\com\simula\service\GerarSimuladoService.class
+br\com\simula\repository\SimuladoConfiguracaoRepository.class
+br\com\simula\dto\GerarSimuladoRequest$ConfiguracaoMateriaRequest$ConfiguracaoMateriaRequestBuilder.class
 br\com\simula\dto\SimuladoResponse.class
 br\com\simula\controller\AssuntoController.class
 br\com\simula\dto\TipoRequest.class
+br\com\simula\dto\SimuladoConfiguracaoResponse.class
 br\com\simula\entity\Cargo.class
 br\com\simula\service\QuestaoService.class
 br\com\simula\dto\TopicoResponse.class

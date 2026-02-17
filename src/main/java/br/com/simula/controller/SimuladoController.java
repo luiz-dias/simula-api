@@ -1,16 +1,10 @@
 package br.com.simula.controller;
 
-import br.com.simula.dto.SimuladoQuestaoRequest;
-import br.com.simula.dto.SimuladoRequest;
-import br.com.simula.dto.SimuladoResponse;
+import br.com.simula.dto.*;
 import br.com.simula.entity.Simulado;
 import br.com.simula.entity.SimuladoQuestao;
 import br.com.simula.mapper.SimulaMapper;
-import br.com.simula.service.CargoService;
-import br.com.simula.service.OrgaoService;
-import br.com.simula.service.QuestaoService;
-import br.com.simula.service.SimuladoDocxService;
-import br.com.simula.service.SimuladoService;
+import br.com.simula.service.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -34,6 +28,7 @@ import java.util.List;
 public class SimuladoController {
 
     private final SimuladoService service;
+    private final GerarSimuladoService gerarSimuladoService;
     private final SimuladoDocxService docxService;
     private final CargoService cargoService;
     private final OrgaoService orgaoService;
@@ -50,7 +45,14 @@ public class SimuladoController {
 
     @GetMapping("/{id}")
     public SimuladoResponse detalhes(@PathVariable Long id) {
-        return mapper.toResponse(service.findById(id));
+        return mapper.toResponse(service.findByIdCompleto(id));
+    }
+
+    @PostMapping("/gerar")
+    @ResponseStatus(HttpStatus.CREATED)
+    public SimuladoResponse gerar(@Valid @RequestBody GerarSimuladoRequest request) {
+        Simulado simulado = gerarSimuladoService.gerar(request);
+        return mapper.toResponse(simulado);
     }
 
     @PostMapping

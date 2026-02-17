@@ -44,6 +44,16 @@ public class SimuladoService {
                 .orElseThrow(() -> new RuntimeException("Simulado não encontrado com id: " + id));
     }
 
+    @Transactional(readOnly = true)
+    public Simulado findByIdCompleto(Long id) {
+        Simulado simulado = repository.findByIdComConfiguracoes(id)
+                .orElseThrow(() -> new RuntimeException("Simulado não encontrado com id: " + id));
+        Simulado comQuestoes = repository.findByIdComQuestoesCompletas(id)
+                .orElseThrow(() -> new RuntimeException("Simulado não encontrado com id: " + id));
+        simulado.setSimuladosQuestoes(comQuestoes.getSimuladosQuestoes());
+        return simulado;
+    }
+
     @Transactional
     public Simulado create(Simulado simulado) {
         if (simulado.getCargo() != null && simulado.getCargo().getId() != null) {

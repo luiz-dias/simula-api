@@ -112,29 +112,44 @@ public class SimulaMapper {
                 .build();
     }
 
+    public SimuladoConfiguracaoResponse toResponse(SimuladoConfiguracao e) {
+        if (e == null) return null;
+        return SimuladoConfiguracaoResponse.builder()
+                .id(e.getId())
+                .materia(toResponse(e.getMateria()))
+                .assunto(toResponse(e.getAssunto()))
+                .topico(toResponse(e.getTopico()))
+                .quantidade(e.getQuantidade())
+                .quantidadeSelecionada(e.getQuantidadeSelecionada())
+                .build();
+    }
+
     public SimuladoQuestaoResponse toResponse(SimuladoQuestao e) {
         if (e == null) return null;
-        Long questaoId = e.getQuestao() != null ? e.getQuestao().getId() : null;
         return SimuladoQuestaoResponse.builder()
                 .id(e.getId())
-                .questaoId(questaoId)
                 .ordem(e.getOrdem())
+                .questao(toResponse(e.getQuestao()))
                 .build();
     }
 
     public SimuladoResponse toResponse(Simulado e) {
         if (e == null) return null;
+        List<SimuladoConfiguracaoResponse> configs = e.getConfiguracoes() != null
+                ? e.getConfiguracoes().stream().map(this::toResponse).collect(Collectors.toList())
+                : Collections.emptyList();
         List<SimuladoQuestaoResponse> questoes = e.getSimuladosQuestoes() != null
                 ? e.getSimuladosQuestoes().stream().map(this::toResponse).collect(Collectors.toList())
                 : Collections.emptyList();
         return SimuladoResponse.builder()
                 .id(e.getId())
                 .titulo(e.getTitulo())
-                .cargoId(e.getCargo() != null ? e.getCargo().getId() : null)
-                .orgaoId(e.getOrgao() != null ? e.getOrgao().getId() : null)
+                .orgao(toResponse(e.getOrgao()))
+                .cargo(toResponse(e.getCargo()))
                 .ano(e.getAno())
                 .dataCriacao(e.getDataCriacao())
                 .ordemMaterias(e.getOrdemMaterias())
+                .configuracoes(configs)
                 .simuladosQuestoes(questoes)
                 .createdAt(e.getCreatedAt())
                 .updatedAt(e.getUpdatedAt())

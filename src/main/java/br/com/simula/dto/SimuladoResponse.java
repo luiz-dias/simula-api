@@ -15,11 +15,12 @@ public class SimuladoResponse {
 
     private Long id;
     private String titulo;
-    private Long cargoId;
-    private Long orgaoId;
+    private OrgaoResponse orgao;
+    private CargoResponse cargo;
     private Integer ano;
     private LocalDate dataCriacao;
     private List<Long> ordemMaterias;
+    private List<SimuladoConfiguracaoResponse> configuracoes;
     private List<SimuladoQuestaoResponse> simuladosQuestoes;
     private Instant createdAt;
     private Instant updatedAt;

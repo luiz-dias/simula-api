@@ -23,4 +23,33 @@ public interface SimuladoRepository extends JpaRepository<Simulado, Long> {
            "LEFT JOIN FETCH q.materia " +
            "WHERE s.id = :id")
     java.util.Optional<Simulado> findByIdWithQuestoes(@Param("id") Long id);
+
+    @Query("SELECT DISTINCT s FROM Simulado s " +
+           "LEFT JOIN FETCH s.cargo c LEFT JOIN FETCH c.orgao " +
+           "LEFT JOIN FETCH s.orgao " +
+           "LEFT JOIN FETCH s.configuracoes cfg " +
+           "LEFT JOIN FETCH cfg.materia " +
+           "LEFT JOIN FETCH cfg.assunto ca LEFT JOIN FETCH ca.materia " +
+           "LEFT JOIN FETCH cfg.topico ct LEFT JOIN FETCH ct.assunto cta LEFT JOIN FETCH cta.materia " +
+           "WHERE s.id = :id")
+    java.util.Optional<Simulado> findByIdComConfiguracoes(@Param("id") Long id);
+
+    @Query("SELECT DISTINCT s FROM Simulado s " +
+           "LEFT JOIN FETCH s.simuladosQuestoes sq " +
+           "LEFT JOIN FETCH sq.questao q " +
+           "LEFT JOIN FETCH q.tipo " +
+           "LEFT JOIN FETCH q.materia " +
+           "LEFT JOIN FETCH q.assunto a LEFT JOIN FETCH a.materia " +
+           "LEFT JOIN FETCH q.topico t LEFT JOIN FETCH t.assunto ta LEFT JOIN FETCH ta.materia " +
+           "LEFT JOIN FETCH q.orgao " +
+           "LEFT JOIN FETCH q.banca " +
+           "LEFT JOIN FETCH q.cargo " +
+           "WHERE s.id = :id")
+    java.util.Optional<Simulado> findByIdComQuestoesCompletas(@Param("id") Long id);
+
+    @Query("SELECT DISTINCT s FROM Simulado s " +
+           "LEFT JOIN FETCH s.cargo c LEFT JOIN FETCH c.orgao " +
+           "LEFT JOIN FETCH s.orgao " +
+           "WHERE s.id = :id")
+    java.util.Optional<Simulado> findByIdCompleto(@Param("id") Long id);
 }

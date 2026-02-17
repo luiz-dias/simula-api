@@ -10,6 +10,6 @@ import lombok.*;
 public class SimuladoQuestaoResponse {
 
     private Long id;
-    private Long questaoId;
     private Integer ordem;
+    private QuestaoResponse questao;
 }

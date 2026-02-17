@@ -48,6 +48,9 @@ public class Simulado {
     private List<Long> ordemMaterias;
 
     @OneToMany(mappedBy = "simulado", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SimuladoConfiguracao> configuracoes;
+
+    @OneToMany(mappedBy = "simulado", cascade = CascadeType.ALL, orphanRemoval = true)
     @OrderBy("ordem ASC")
     private List<SimuladoQuestao> simuladosQuestoes;
 
