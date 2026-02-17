@@ -1,6 +1,7 @@
 E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\dto\SimuladoQuestaoResponse.java
 E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\entity\Tipo.java
 E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\repository\SimuladoQuestaoRepository.java
+E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\repository\QuestaoRepositoryCustom.java
 E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\repository\TopicoRepository.java
 E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\dto\MateriaResponse.java
 E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\repository\OrgaoRepository.java
@@ -18,6 +19,7 @@ E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\entity\SimuladoQ
 E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\exception\EntidadeComVinculosException.java
 E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\entity\Questao.java
 E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\controller\OrgaoController.java
+E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\repository\QuestaoRepositoryImpl.java
 E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\service\MateriaService.java
 E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\controller\AssuntoController.java
 E:\workspace\DEV\PESSOAL\simula-api\src\main\java\br\com\simula\service\CargoService.java

@@ -81,6 +81,7 @@ br\com\simula\entity\Banca.class
 br\com\simula\entity\Topico$TopicoBuilder.class
 br\com\simula\repository\QuestaoRepository.class
 br\com\simula\dto\MateriaRequest$MateriaRequestBuilder.class
+br\com\simula\repository\QuestaoRepositoryCustom.class
 br\com\simula\controller\ExportController.class
 br\com\simula\entity\Tipo.class
 br\com\simula\controller\CargoController.class
@@ -95,4 +96,5 @@ br\com\simula\dto\TopicoRequest.class
 br\com\simula\entity\Orgao$OrgaoBuilder.class
 br\com\simula\entity\Cargo$CargoBuilder.class
 br\com\simula\controller\BancaController.class
+br\com\simula\repository\QuestaoRepositoryImpl.class
 br\com\simula\dto\BancaRequest$BancaRequestBuilder.class

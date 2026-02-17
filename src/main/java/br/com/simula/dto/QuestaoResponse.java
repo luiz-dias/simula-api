@@ -20,13 +20,13 @@ public class QuestaoResponse {
     private String alternativaE;
     private String respostaCorreta;
 
-    private Long tipoId;
-    private Long materiaId;
-    private Long assuntoId;
-    private Long topicoId;
-    private Long orgaoId;
-    private Long bancaId;
-    private Long cargoId;
+    private TipoResponse tipo;
+    private MateriaResponse materia;
+    private AssuntoResponse assunto;
+    private TopicoResponse topico;
+    private OrgaoResponse orgao;
+    private BancaResponse banca;
+    private CargoResponse cargo;
 
     private Integer ano;
     private Instant createdAt;

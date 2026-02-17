@@ -28,7 +28,7 @@ public class QuestaoService {
                                  Long orgaoId, Long bancaId, Long cargoId, Integer ano,
                                  Pageable pageable) {
         Specification<Questao> spec = QuestaoSpec.withFilters(tipoId, materiaId, assuntoId, topicoId, orgaoId, bancaId, cargoId, ano);
-        return repository.findAll(spec, pageable);
+        return repository.findAllWithAssociations(spec, pageable);
     }
 
     @Transactional(readOnly = true)

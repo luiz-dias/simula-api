@@ -10,13 +10,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface QuestaoRepository extends JpaRepository<Questao, Long>, JpaSpecificationExecutor<Questao> {
+public interface QuestaoRepository extends JpaRepository<Questao, Long>, JpaSpecificationExecutor<Questao>, QuestaoRepositoryCustom {
 
-    @Query("SELECT q FROM Questao q " +
+    @Query("SELECT DISTINCT q FROM Questao q " +
            "LEFT JOIN FETCH q.tipo " +
            "LEFT JOIN FETCH q.materia " +
-           "LEFT JOIN FETCH q.assunto " +
-           "LEFT JOIN FETCH q.topico " +
+           "LEFT JOIN FETCH q.assunto a LEFT JOIN FETCH a.materia " +
+           "LEFT JOIN FETCH q.topico t LEFT JOIN FETCH t.assunto ta LEFT JOIN FETCH ta.materia " +
            "LEFT JOIN FETCH q.orgao " +
            "LEFT JOIN FETCH q.banca " +
            "LEFT JOIN FETCH q.cargo " +
